@@ -4,9 +4,9 @@ import { Profession } from '@/modules/professions/types';
 import { PaginatedResult } from '@/shared/types';
 
 export default async function Home() {
-  const page = "1";
-  const searchPattern = "";
-  const limit = "9";
+  const page = '1';
+  const searchPattern = '';
+  const limit = '9';
 
   const res: PaginatedResult<Profession> = await findProfessions(searchPattern, page, limit);
 

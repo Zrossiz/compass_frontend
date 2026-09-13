@@ -1,7 +1,5 @@
-import { PaginationProps } from "./Pagination.props"
+import { PaginationProps } from './Pagination.props';
 
 export const Pagination = ({ curPage, totalPages }: PaginationProps) => {
-  return (
-    <div></div>
-  )
-}
+  return <div></div>;
+};

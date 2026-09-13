@@ -3,4 +3,4 @@ export type Profession = {
   title: string;
   description: string;
   created_at: Date;
-}
+};

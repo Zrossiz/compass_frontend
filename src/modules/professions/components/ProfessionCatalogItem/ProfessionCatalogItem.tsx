@@ -1,4 +1,4 @@
-import { ProfessionCatalogItemProps } from "./ProfessionCatalogItem.props"
+import { ProfessionCatalogItemProps } from './ProfessionCatalogItem.props';
 import styles from './ProfessionCatalogItem.module.scss';
 
 export const ProfessionCatalogItem = ({ profession }: ProfessionCatalogItemProps) => {
@@ -10,5 +10,5 @@ export const ProfessionCatalogItem = ({ profession }: ProfessionCatalogItemProps
       <span>description: {profession.description}</span>
       <span>created_at: {profession.created_at.toString()} </span>
     </div>
-  )
-}
+  );
+};
