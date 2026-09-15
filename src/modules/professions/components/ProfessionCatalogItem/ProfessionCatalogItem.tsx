@@ -8,7 +8,7 @@ export const ProfessionCatalogItem = ({ profession }: ProfessionCatalogItemProps
       <span>id: {profession.id}</span>
       <span>title: {profession.title}</span>
       <span>description: {profession.description}</span>
-      <span>created_at: {profession.created_at.toString()} </span>
+      {/* <span>created_at: {profession.created_at.toString()} </span> */}
     </div>
   );
 };

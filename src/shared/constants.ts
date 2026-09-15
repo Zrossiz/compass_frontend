@@ -1,1 +1,1 @@
-export const baseUrl = process.env.API_URL ?? 'http://localhost:10000';
+export const baseUrl = process.env.BACKEND_URL ?? 'http://localhost:10000';
