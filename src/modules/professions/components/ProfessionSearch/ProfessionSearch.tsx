@@ -32,18 +32,13 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
         <span>поиск профессий: </span>
-        <input
-          placeholder="Найти профессию"
-          value={search}
-          onChange={(event) => change(event.target.value)}
-        />
+        <input placeholder="Найти профессию" value={search} onChange={(event) => change(event.target.value)} />
         {open && (
           <div className={styles.suggestions}>
             {loading && <p>Поиск…</p>}
@@ -52,9 +47,7 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
             <ul>
               {suggestions.map((profession) => (
                 <li key={profession.id}>
-                  <Link href={`/professions/${profession.id}`}>
-                    {profession.title}
-                  </Link>
+                  <Link href={`/professions/${profession.id}`}>{profession.title}</Link>
                 </li>
               ))}
             </ul>

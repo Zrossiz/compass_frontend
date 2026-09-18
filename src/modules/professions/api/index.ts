@@ -10,6 +10,6 @@ export const findProfessions = async (search: string, page: string, limit: strin
   });
 
   const res = await apiClient.get<PaginatedResult<Profession>>(`/api/v1/professions?${query}`);
-  
+
   return res.data;
 };

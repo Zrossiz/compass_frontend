@@ -35,11 +35,7 @@ export const ProfessionExplorer = ({ initialProfessions }: { initialProfessions:
       {loading && <p>Загрузка профессий…</p>}
       {error && <p>{error}</p>}
       <section>
-        <ProfessionCatalog 
-          professions={professions} 
-          loading={loading} 
-          onPageChange={(page) => load(pattern, page)} 
-        />
+        <ProfessionCatalog professions={professions} loading={loading} onPageChange={(page) => load(pattern, page)} />
       </section>
     </>
   );

@@ -14,7 +14,12 @@ export const ProfessionCatalog = ({ professions, onPageChange, loading }: Profes
         })}
       </ul>
       <div>
-        <Pagination totalPages={professions.totalPages} curPage={professions.curPage} onPageChange={onPageChange} disabled={loading} />
+        <Pagination
+          totalPages={professions.totalPages}
+          curPage={professions.curPage}
+          onPageChange={onPageChange}
+          disabled={loading}
+        />
       </div>
     </div>
   );
