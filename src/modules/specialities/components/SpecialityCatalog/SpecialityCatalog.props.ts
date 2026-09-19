@@ -1,6 +1,8 @@
-import { PaginatedResult } from "@/shared/types"
-import { Speciality } from "@/modules/specialities/types";
+import { PaginatedResult } from '@/shared/types';
+import { Speciality } from '@/modules/specialities/types';
 
 export type SpecialityCatalogProps = {
-    specialities: PaginatedResult<Speciality>;
-}
+  specialities: PaginatedResult<Speciality>;
+  onPageChange: (page: number) => void;
+  loading?: boolean;
+};

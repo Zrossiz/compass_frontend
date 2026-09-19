@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { findProfessions } from '../../api';
-import type { Profession } from '../../types';
+import type { Speciality } from '@/modules/specialities/types';
+import { findSpecialities } from '@/modules/specialities/api';
 import styles from './ProfessionSearch.module.scss';
-import { ProfessionSearchProps } from './ProfessionSearch.props';
+import { SpeicalitySearchProps } from './SpecialitySearch.props';
 import Link from 'next/link';
 
-export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
+export const SpecialitySearch = ({ pattern, professionId }: SpeicalitySearchProps) => {
   const [search, setSearch] = useState(pattern ?? '');
-  const [suggestions, setSuggestions] = useState<Profession[]>([]);
+  const [suggestions, setSuggestions] = useState<Speciality[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,7 +24,7 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
     if (!query) return;
 
     try {
-      const result = await findProfessions(query, '1', '5');
+      const result = await findSpecialities(query, '1', '5');
       setSuggestions(result.items);
     } catch (err: unknown) {
       console.log(err);
@@ -37,9 +37,9 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
-        <span>поиск профессий: </span>
+        <span>поиск специальностей: </span>
         <input
-          placeholder="Найти профессию"
+          placeholder="Найти специальность"
           value={search}
           onChange={(event) => change(event.target.value)}
         />
@@ -49,9 +49,11 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
             {error && <p>{error}</p>}
             {!loading && !error && suggestions.length === 0 && <p>Ничего не найдено</p>}
             <ul>
-              {suggestions.map((profession) => (
-                <li key={profession.id}>
-                  <Link href={`/professions/${profession.id}`}>{profession.title}</Link>
+              {suggestions.map((speciality) => (
+                <li key={speciality.id}>
+                  <Link href={`/professions/${professionId}/specialities/${speciality.id}`}>
+                    {speciality.title}
+                  </Link>
                 </li>
               ))}
             </ul>

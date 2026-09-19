@@ -1,6 +1,7 @@
 import { findProfessions } from '@/modules/professions/api';
 import { ProfessionExplorer } from '@/modules/professions/components/ProfessionExplorer/ProfessionExplorer';
 import { Profession } from '@/modules/professions/types';
+import { professionCatalogBatchSize } from '@/shared/constants';
 import { PaginatedResult } from '@/shared/types';
 
 type HomeProps = {
@@ -16,9 +17,13 @@ export default async function Home({ searchParams }: HomeProps) {
 
   const page = params.page ?? '1';
   const searchPattern = params.search ?? '';
-  const limit = '9';
+  const limit = professionCatalogBatchSize;
 
-  const res: PaginatedResult<Profession> = await findProfessions(searchPattern, page, limit);
+  const res: PaginatedResult<Profession> = await findProfessions(
+    searchPattern,
+    page,
+    String(limit),
+  );
 
   return (
     <div>

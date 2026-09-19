@@ -3,7 +3,11 @@ import styles from './ProfessionCatalog.module.scss';
 import { ProfessionCatalogItem } from '../ProfessionCatalogItem';
 import { Pagination } from '@/shared/components/Pagination';
 
-export const ProfessionCatalog = ({ professions, onPageChange, loading }: ProfessionCatalogProps) => {
+export const ProfessionCatalog = ({
+  professions,
+  onPageChange,
+  loading,
+}: ProfessionCatalogProps) => {
   return (
     <div>
       <h1>profession catalog</h1>

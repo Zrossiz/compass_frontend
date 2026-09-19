@@ -7,7 +7,11 @@ import type { PaginatedResult } from '@/shared/types';
 import { ProfessionSearch } from '../ProfessionSearch';
 import { ProfessionCatalog } from '../ProfessionCatalog';
 
-export const ProfessionExplorer = ({ initialProfessions }: { initialProfessions: PaginatedResult<Profession> }) => {
+export const ProfessionExplorer = ({
+  initialProfessions,
+}: {
+  initialProfessions: PaginatedResult<Profession>;
+}) => {
   const [professions, setProfessions] = useState(initialProfessions);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -35,7 +39,11 @@ export const ProfessionExplorer = ({ initialProfessions }: { initialProfessions:
       {loading && <p>Загрузка профессий…</p>}
       {error && <p>{error}</p>}
       <section>
-        <ProfessionCatalog professions={professions} loading={loading} onPageChange={(page) => load(pattern, page)} />
+        <ProfessionCatalog
+          professions={professions}
+          loading={loading}
+          onPageChange={(page) => load(pattern, page)}
+        />
       </section>
     </>
   );

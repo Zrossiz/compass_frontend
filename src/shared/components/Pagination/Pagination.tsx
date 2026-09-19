@@ -5,14 +5,22 @@ export const Pagination = ({ curPage, totalPages, onPageChange, disabled }: Pagi
 
   return (
     <nav aria-label="Страницы профессий">
-      <button type="button" disabled={disabled || curPage <= 1} onClick={() => onPageChange(curPage - 1)}>
+      <button
+        type="button"
+        disabled={disabled || curPage <= 1}
+        onClick={() => onPageChange(curPage - 1)}
+      >
         Назад
       </button>
       <span aria-live="polite">
         {' '}
         {curPage} из {totalPages}{' '}
       </span>
-      <button type="button" disabled={disabled || curPage >= totalPages} onClick={() => onPageChange(curPage + 1)}>
+      <button
+        type="button"
+        disabled={disabled || curPage >= totalPages}
+        onClick={() => onPageChange(curPage + 1)}
+      >
         Вперёд
       </button>
     </nav>

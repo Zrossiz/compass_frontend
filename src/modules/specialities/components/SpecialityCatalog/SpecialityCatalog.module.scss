@@ -1,0 +1,10 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+}

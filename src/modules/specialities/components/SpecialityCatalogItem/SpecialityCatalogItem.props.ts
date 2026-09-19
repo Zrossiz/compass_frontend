@@ -1,5 +1,5 @@
-import { Speciality } from "@/modules/specialities/types"
+import { Speciality } from '@/modules/specialities/types';
 
 export type SpecialityCatalogItemProps = {
-    speciality: Speciality;
-}
+  speciality: Speciality;
+};

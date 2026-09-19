@@ -1,4 +1,4 @@
-import { Profession } from '@/modules/professions/types/index';
+import { Profession } from '@/modules/professions/types';
 
 export type ProfessionCatalogItemProps = {
   profession: Profession;
