@@ -1,4 +1,3 @@
-import { ProfessionExplorer } from '@/modules/professions/components/ProfessionExplorer/ProfessionExplorer';
 import { findSpecialities } from '@/modules/specialities/api';
 import { SpecialityExplorer } from '@/modules/specialities/components/SpecialityExplorer/SpecialityExplorer';
 import { Speciality } from '@/modules/specialities/types';
