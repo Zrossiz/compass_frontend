@@ -2,16 +2,12 @@
 
 import { useState } from 'react';
 import { findProfessions } from '@/modules/professions/api';
-import type { Profession } from '@/modules/professions/types';
-import type { PaginatedResult } from '@/shared/types';
 import { ProfessionSearch } from '../ProfessionSearch';
 import { ProfessionCatalog } from '../ProfessionCatalog';
+import { ProfessionExplorerProps } from './ProfessionExplorer.props';
+import { professionCatalogBatchSize } from '@/shared/constants';
 
-export const ProfessionExplorer = ({
-  initialProfessions,
-}: {
-  initialProfessions: PaginatedResult<Profession>;
-}) => {
+export const ProfessionExplorer = ({ sphereId, initialProfessions }: ProfessionExplorerProps) => {
   const [professions, setProfessions] = useState(initialProfessions);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,7 +18,7 @@ export const ProfessionExplorer = ({
     setError('');
 
     try {
-      const result = await findProfessions(search, String(page), '9');
+      const result = await findProfessions(sphereId, search, page, professionCatalogBatchSize);
       setPattern(search);
       setProfessions(result);
     } catch (err: unknown) {
@@ -35,7 +31,7 @@ export const ProfessionExplorer = ({
 
   return (
     <>
-      <ProfessionSearch pattern={pattern ?? null} />
+      <ProfessionSearch pattern={pattern ?? null} sphereId={sphereId} />
       {loading && <p>Загрузка профессий…</p>}
       {error && <p>{error}</p>}
       <section>

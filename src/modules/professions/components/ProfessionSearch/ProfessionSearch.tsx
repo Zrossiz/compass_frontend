@@ -7,7 +7,7 @@ import styles from './ProfessionSearch.module.scss';
 import { ProfessionSearchProps } from './ProfessionSearch.props';
 import Link from 'next/link';
 
-export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
+export const ProfessionSearch = ({ pattern, sphereId }: ProfessionSearchProps) => {
   const [search, setSearch] = useState(pattern ?? '');
   const [suggestions, setSuggestions] = useState<Profession[]>([]);
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export const ProfessionSearch = ({ pattern }: ProfessionSearchProps) => {
     if (!query) return;
 
     try {
-      const result = await findProfessions(query, '1', '5');
+      const result = await findProfessions(sphereId, query, 1, 5);
       setSuggestions(result.items);
     } catch (err: unknown) {
       console.log(err);

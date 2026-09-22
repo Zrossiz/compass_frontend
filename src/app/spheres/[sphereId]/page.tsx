@@ -31,7 +31,7 @@ export default async function ProfessionsPage({ searchQuryParams, params }: Prof
     <div>
       <main>
         <h1>Compass</h1>
-        <ProfessionExplorer initialProfessions={res} />
+        <ProfessionExplorer initialProfessions={res} sphereId={Number(sphereId)} />
       </main>
     </div>
   );
