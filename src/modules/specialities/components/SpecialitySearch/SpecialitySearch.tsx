@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { Speciality } from '@/modules/specialities/types';
 import { findSpecialities } from '@/modules/specialities/api';
-import styles from './ProfessionSearch.module.scss';
+import styles from './SpecialitySearch.module.scss';
 import { SpeicalitySearchProps } from './SpecialitySearch.props';
 import Link from 'next/link';
 

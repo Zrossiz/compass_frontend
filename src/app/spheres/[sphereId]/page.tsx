@@ -17,8 +17,8 @@ export default async function ProfessionsPage({ searchQuryParams, params }: Prof
   const searchParams = await searchQuryParams;
   const { sphereId } = await params;
 
-  const page = searchParams.page ?? '1';
-  const searchPattern = searchParams.search ?? '';
+  const page = searchParams?.page ?? '1';
+  const searchPattern = searchParams?.search ?? '';
 
   const res: PaginatedResult<Profession> = await findProfessions(
     Number(sphereId),
