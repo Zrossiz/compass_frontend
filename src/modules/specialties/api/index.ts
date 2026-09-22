@@ -15,7 +15,13 @@ export const findSpecialities = async (
     professionId: professionId,
   });
 
-  const res = await apiClient.get<PaginatedResult<Speciality>>(`/api/v1/specialites?${query}`);
+  const res = await apiClient.get<PaginatedResult<Speciality>>(`/api/v1/specialties?${query}`);
+
+  return res.data;
+};
+
+export const getSpeciality = async (specialityId: number) => {
+  const res = await apiClient.get<Speciality>(`/api/v1/specialties/${specialityId}`);
 
   return res.data;
 };

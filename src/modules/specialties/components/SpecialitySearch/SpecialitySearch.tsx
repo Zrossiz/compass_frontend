@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import type { Speciality } from '@/modules/specialities/types';
-import { findSpecialities } from '@/modules/specialities/api';
+import type { Speciality } from '@/modules/specialties/types';
+import { findSpecialities } from '@/modules/specialties/api';
 import styles from './SpecialitySearch.module.scss';
 import { SpeicalitySearchProps } from './SpecialitySearch.props';
 import Link from 'next/link';
 
-export const SpecialitySearch = ({ pattern, professionId }: SpeicalitySearchProps) => {
+export const SpecialitySearch = ({ pattern, professionId, sphereId }: SpeicalitySearchProps) => {
   const [search, setSearch] = useState(pattern ?? '');
   const [suggestions, setSuggestions] = useState<Speciality[]>([]);
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export const SpecialitySearch = ({ pattern, professionId }: SpeicalitySearchProp
     if (!query) return;
 
     try {
-      const result = await findSpecialities(query, '1', '5');
+      const result = await findSpecialities(String(professionId), query, '1', '5');
       setSuggestions(result.items);
     } catch (err: unknown) {
       console.log(err);
@@ -51,7 +51,9 @@ export const SpecialitySearch = ({ pattern, professionId }: SpeicalitySearchProp
             <ul>
               {suggestions.map((speciality) => (
                 <li key={speciality.id}>
-                  <Link href={`/professions/${professionId}/specialities/${speciality.id}`}>
+                  <Link
+                    href={`/spheres/${sphereId}/professions/${professionId}/specialities/${speciality.id}`}
+                  >
                     {speciality.title}
                   </Link>
                 </li>

@@ -5,10 +5,12 @@ import { findSpecialities } from '../../api';
 import { SpecialityCatalog } from '../SpecialityCatalog';
 import { SpecialitySearch } from '../SpecialitySearch';
 import { SpecialityExplorerProps } from './SpeicialityExplorer.props';
+import { specialityCatalogBatchSize } from '@/shared/constants';
 
 export const SpecialityExplorer = ({
   initialSpecialities,
   professionId,
+  sphereId,
 }: SpecialityExplorerProps) => {
   const [specialities, setspecialities] = useState(initialSpecialities);
   const [loading, setLoading] = useState(false);
@@ -20,7 +22,12 @@ export const SpecialityExplorer = ({
     setError('');
 
     try {
-      const result = await findSpecialities(search, String(page), '9');
+      const result = await findSpecialities(
+        String(professionId),
+        search,
+        String(page),
+        String(specialityCatalogBatchSize),
+      );
       setPattern(search);
       setspecialities(result);
     } catch (err: unknown) {
@@ -33,7 +40,7 @@ export const SpecialityExplorer = ({
 
   return (
     <>
-      <SpecialitySearch pattern={pattern ?? null} professionId={professionId} />
+      <SpecialitySearch pattern={pattern ?? null} professionId={professionId} sphereId={sphereId} />
       {loading && <p>Загрузка профессий…</p>}
       {error && <p>{error}</p>}
       <section>

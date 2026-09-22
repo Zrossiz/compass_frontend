@@ -6,19 +6,19 @@ import { PaginatedResult } from '@/shared/types';
 
 type ProfessionsPageProps = {
   params: Promise<{ sphereId: string }>;
-  searchQuryParams: Promise<{
+  searchParams: Promise<{
     page?: string;
     search?: string;
     limit?: string;
   }>;
 };
 
-export default async function ProfessionsPage({ searchQuryParams, params }: ProfessionsPageProps) {
-  const searchParams = await searchQuryParams;
+export default async function ProfessionsPage({ searchParams, params }: ProfessionsPageProps) {
+  const query = await searchParams;
   const { sphereId } = await params;
 
-  const page = searchParams?.page ?? '1';
-  const searchPattern = searchParams?.search ?? '';
+  const page = query.page ?? '1';
+  const searchPattern = query.search ?? '';
 
   const res: PaginatedResult<Profession> = await findProfessions(
     Number(sphereId),

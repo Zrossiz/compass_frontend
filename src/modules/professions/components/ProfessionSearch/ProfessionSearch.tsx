@@ -51,7 +51,9 @@ export const ProfessionSearch = ({ pattern, sphereId }: ProfessionSearchProps) =
             <ul>
               {suggestions.map((profession) => (
                 <li key={profession.id}>
-                  <Link href={`/professions/${profession.id}`}>{profession.title}</Link>
+                  <Link href={`/spheres/${sphereId}/professions/${profession.id}`}>
+                    {profession.title}
+                  </Link>
                 </li>
               ))}
             </ul>
