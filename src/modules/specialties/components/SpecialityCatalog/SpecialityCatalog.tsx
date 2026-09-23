@@ -7,6 +7,7 @@ export const SpecialityCatalog = ({
   specialities,
   onPageChange,
   loading,
+  sphereId
 }: SpecialityCatalogProps) => {
   return (
     <div>
@@ -14,7 +15,7 @@ export const SpecialityCatalog = ({
       {!loading && specialities.items.length === 0 && <p>Ничего не найдено</p>}
       <ul className={styles.list}>
         {specialities.items.map((speicality) => {
-          return <SpecialityCatalogItem key={speicality.id} speciality={speicality} />;
+          return <SpecialityCatalogItem key={speicality.id} sphereId={sphereId} speciality={speicality} />;
         })}
       </ul>
       <div>

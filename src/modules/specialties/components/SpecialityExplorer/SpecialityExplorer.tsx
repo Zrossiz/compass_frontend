@@ -45,6 +45,7 @@ export const SpecialityExplorer = ({
       {error && <p>{error}</p>}
       <section>
         <SpecialityCatalog
+          sphereId={sphereId}
           specialities={specialities}
           loading={loading}
           onPageChange={(page) => load(pattern, page)}
