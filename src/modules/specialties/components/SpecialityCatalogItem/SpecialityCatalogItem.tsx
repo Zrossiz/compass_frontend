@@ -5,7 +5,9 @@ import Link from 'next/link';
 export const SpecialityCatalogItem = ({ sphereId, speciality }: SpecialityCatalogItemProps) => {
   return (
     <li className={styles.item}>
-      <Link href={`/spheres/${sphereId}/professions/${speciality.professionId}/specialties/${speciality.id}`}> 
+      <Link
+        href={`/spheres/${sphereId}/professions/${speciality.professionId}/specialties/${speciality.id}`}
+      >
         <span>id: {speciality.id}</span>
         <br />
         <span>title: {speciality.title}</span>
