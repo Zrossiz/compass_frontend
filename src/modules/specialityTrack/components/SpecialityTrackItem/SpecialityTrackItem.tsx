@@ -1,3 +1,4 @@
+import { mediaUrl } from '@/shared/constants';
 import styles from './SpecialityTrackItem.module.scss';
 import { SpecialityTrackItemProps } from './SpecialityTrackItem.props';
 import Image from 'next/image';
@@ -7,9 +8,9 @@ export const SpecialityTrackItem = ({ track }: SpecialityTrackItemProps) => {
   return (
     <div className={styles.wrapper}>
       <span>track</span>
-      <br />
+      {/* <br /> */}
       <Image
-        src={track.imageLink}
+        src={`${mediaUrl}/${track.imageLink}`}
         width={300}
         height={200}
         alt={`speciality track for speciality: ${track.specialityId}`}

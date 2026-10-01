@@ -6,7 +6,14 @@ export const SpecialityInterviewItem = ({ interview }: SpecialityInterviewItemPr
     <div className={styles.wrapper}>
       <span>video interview</span>
       <br />
-      <video src={interview.videoLink}></video>
+      <iframe 
+        src={interview.videoLink} 
+        width="640" 
+        height="360" 
+        allow="encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+        frameborder="0" 
+        allowfullscreen
+      ></iframe>
     </div>
   );
 };
