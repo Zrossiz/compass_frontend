@@ -29,6 +29,9 @@ jobs:
         run: npm i
       
       - name: Build frontend
+        env:
+          NEXT_PUBLIC_BACKEND_URL: http://176.108.244.208:10000
+          NEXT_PUBLIC_MEDIA_URL: http://176.108.244.208:9000
         run: npm run build
       
       - name: Create deployment archive
