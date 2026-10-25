@@ -5,9 +5,6 @@ export default async function Home() {
   const spheres = await getAll();
 
   return (
-    <>
-      <h1>hello ci/cd</h1>
-      <SphereCatalog spheres={spheres} />
-    </>
+    <SphereCatalog spheres={spheres} />
   );
 }
