@@ -1,0 +1,1111 @@
+/* Design source: frontend/compass-catalog5.html. Keep reference tokens and dimensions in sync. */
+
+/* ============================================================
+   COMPASS: ОФОРМЛЕНИЕ В СТИЛЕ MATERIAL DESIGN 3
+
+   Material Design — открытая дизайн-система Google.
+   Из неё взяты шрифт Roboto, набор цветов, округлые формы,
+   плашки-фильтры, вкладки и поле поиска.
+
+   1. ПЕРЕМЕННЫЕ
+   Все цвета заданы здесь. Тёмная тема меняет только их.
+   Четыре акцента: синий — основной маршрут и ссылки,
+   жёлтый — второй путь и пометки «черновик»,
+   красный — метка «Ты здесь», зелёный — плашка «Что радует»,
+   тёмная плашка — «Что трудно».
+   ============================================================ */
+:root {
+  --bg: #FFFFFF;                 /* фон страницы */
+  --surface: #FFFFFF;            /* фон точек на линии маршрута */
+  --container-low: #F8FAFD;      /* самые светлые плашки */
+  --container: #F0F4F9;          /* плашки и карточки */
+  --container-high: #E9EEF6;     /* поле поиска, шкалы */
+
+  --ink: #1F1F1F;                /* основной текст */
+  --ink-soft: #444746;           /* второстепенный текст */
+  --outline: #747775;            /* рамки кнопок */
+  --rule: #C4C7C5;               /* рамки карточек */
+  --divider: #E1E3E1;            /* линии между строками списка */
+
+  --primary: #0B57D0;            /* синий: ссылки, линия маршрута, выбранная вкладка */
+  --on-primary: #FFFFFF;
+  --primary-container: #D3E3FD;  /* светло-синие плашки */
+  --on-primary-container: #041E49;
+  --primary-tint: #E8F0FE;       /* самый светлый синий фон */
+
+  --selected: #C2E7FF;           /* нажатая кнопка */
+  --on-selected: #001D35;
+
+  --yellow: #F9AB00;             /* линия второго пути */
+  --yellow-container: #FEF7E0;   /* жёлтые плашки */
+  --on-yellow-container: #3D3000;
+
+  --red: #B3261E;                /* метка «Ты здесь» */
+  --on-red: #FFFFFF;
+
+  --green-container: #C4EED0;    /* зелёная плашка «Что радует» */
+  --on-green-container: #072711;
+
+  --inverse: #303030;            /* тёмная плашка «Что трудно» */
+  --on-inverse: #F2F2F2;
+
+  --state: rgba(31, 31, 31, 0.08);   /* подсветка при наведении */
+
+  --font: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Значки. Каждый — маленький рисунок SVG, записанный прямо в стилях.
+     Цвет значка задаёт элемент, на который значок наложен как маска. */
+  --icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E");
+  --icon-expand: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z'/%3E%3C/svg%3E");
+  --icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] {
+  --bg: #131314;
+  --surface: #131314;
+  --container-low: #1B1B1B;
+  --container: #1E1F20;
+  --container-high: #282A2C;
+
+  --ink: #E3E3E3;
+  --ink-soft: #C4C7C5;
+  --outline: #8E918F;
+  --rule: #444746;
+  --divider: #333537;
+
+  --primary: #A8C7FA;
+  --on-primary: #062E6F;
+  --primary-container: #0842A0;
+  --on-primary-container: #D3E3FD;
+  --primary-tint: #1A2740;
+
+  --selected: #004A77;
+  --on-selected: #C2E7FF;
+
+  --yellow: #FDD663;
+  --yellow-container: #3A3009;
+  --on-yellow-container: #FFE9A6;
+
+  --red: #F2B8B5;
+  --on-red: #601410;
+
+  --green-container: #0F5223;
+  --on-green-container: #C4EED0;
+
+  --inverse: #E3E3E3;
+  --on-inverse: #303030;
+
+  --state: rgba(227, 227, 227, 0.08);
+}
+
+/* ============================================================
+   2. ОСНОВА
+   ============================================================ */
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: break-word;      /* слишком длинное слово переносится, а не вылезает за край */
+}
+
+.page {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 0 16px 72px;
+}
+
+h1, h2, h3 { margin: 0; }
+
+h1 {
+  font-weight: 400;
+  font-size: clamp(2.25rem, 9vw, 3.5rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+}
+
+/* Заголовки с длинными словами: «Дерматовенеролог», «Рентгенэндоваскулярный». */
+h1.is-long { font-size: clamp(1.625rem, 7vw, 3rem); }
+h1.is-very-long { font-size: clamp(1.375rem, 6vw, 2.75rem); }
+
+h2 {
+  font-weight: 400;
+  font-size: clamp(1.375rem, 5vw, 1.75rem);
+  line-height: 1.29;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 1.75rem 0 0.35rem;
+}
+
+p { margin: 0 0 1rem; }
+
+ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+li { margin-bottom: 0.5rem; }
+
+strong { font-weight: 500; }
+
+.lead {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  margin-top: 0.75rem;
+}
+
+a { color: var(--primary); }
+
+button { font: inherit; color: inherit; }
+
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.muted { color: var(--ink-soft); }
+.small { font-size: 0.875rem; line-height: 1.43; }
+
+/* Пометка «это черновик, проверит специалист». */
+.draft {
+  display: inline-block;
+  background: var(--yellow-container);
+  color: var(--on-yellow-container);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Маленькая синяя пометка рядом с названием, например «подробно». */
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 8px;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  vertical-align: 0.15em;
+}
+
+/* ============================================================
+   3. ШАПКА: ЛОГОТИП, КНОПКА ТЕМЫ, ПУТЬ К СТРАНИЦЕ
+   ============================================================ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.logo { width: 32px; height: 32px; }
+
+.wordmark { font-size: 1.375rem; line-height: 1; }
+
+/* Круглая кнопка со значком. */
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.icon-button:hover { background: var(--state); }
+.icon-button svg { width: 24px; height: 24px; fill: currentColor; }
+
+.demo-note {
+  background: var(--yellow-container);
+  color: var(--on-yellow-container);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  margin: 0;
+}
+
+/* Путь к странице: «Медицина › Врач › Офтальмолог». */
+.route {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 0.875rem;
+}
+
+.stop {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+a.stop:hover { color: var(--primary); text-decoration: underline; }
+
+.stop[aria-current="page"] { color: var(--ink); font-weight: 500; }
+
+.stop:not(:last-child)::after {      /* стрелка-разделитель */
+  content: "";
+  width: 18px;
+  height: 18px;
+  margin: 0 2px;
+  background: var(--outline);
+  -webkit-mask: var(--icon-chevron) center / contain no-repeat;
+  mask: var(--icon-chevron) center / contain no-repeat;
+}
+
+/* ============================================================
+   4. КНОПКИ ВЫБОРА (ФИЛЬТРЫ, ЗРЕНИЕ, КЛАСС)
+   Одна и та же плашка на всех страницах.
+   Нажатая плашка помечена атрибутом aria-pressed="true":
+   она закрашена, и перед текстом появляется галочка.
+   ============================================================ */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  background: none;
+  padding: 5px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  cursor: pointer;
+}
+
+.chip:hover { background: var(--state); }
+
+.chip[aria-pressed="true"] {
+  background: var(--selected);
+  border-color: var(--selected);
+  color: var(--on-selected);
+  padding-left: 8px;
+}
+
+.chip[aria-pressed="true"]::before,
+.check-buttons button[aria-pressed="true"]::before {      /* галочка */
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: var(--icon-check) center / contain no-repeat;
+  mask: var(--icon-check) center / contain no-repeat;
+}
+
+/* Кнопка «Сразу к списку специальностей». */
+.jump {
+  min-height: 40px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--selected);
+  color: var(--on-selected);
+  padding: 8px 24px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.jump:hover { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15); }
+
+/* ============================================================
+   5. СПИСОК ПРОФЕССИЙ И СПЕЦИАЛЬНОСТЕЙ
+   Порядок всегда по алфавиту: рейтингов у Compass нет.
+   ============================================================ */
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--divider); }
+
+.list li { border-bottom: 1px solid var(--divider); margin: 0; }
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  align-items: start;
+  padding: 14px 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.item > span { min-width: 0; }
+
+a.item:hover { background: var(--state); }
+a.item:hover .item-name { color: var(--primary); }
+
+.item-name { font-size: 1rem; font-weight: 500; display: block; }
+.item-text { color: var(--ink-soft); display: block; font-size: 0.875rem; line-height: 1.43; }
+.item-much { display: block; font-size: 0.8125rem; color: var(--ink-soft); margin-top: 4px; }
+
+/* Пометка справа: «вуз» или «колледж». */
+.item-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+/* Буква алфавита перед группой специальностей. */
+.list li.letter {
+  padding: 24px 8px 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Поле поиска. */
+.search { position: relative; display: block; margin-bottom: 1rem; }
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  background: var(--ink-soft);
+  -webkit-mask: var(--icon-search) center / contain no-repeat;
+  mask: var(--icon-search) center / contain no-repeat;
+  pointer-events: none;
+}
+
+.search input {
+  display: block;
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 28px;
+  background: var(--container-high);
+  color: var(--ink);
+  padding: 0 20px 0 52px;
+  font: inherit;
+}
+
+.search input::placeholder { color: var(--ink-soft); }
+
+/* ============================================================
+   6. КАРТОЧКИ: ДВА ПУТИ, СОВЕТ, ВЫБОР КЛАССА
+   ============================================================ */
+.ways { display: grid; gap: 12px; }
+
+.way {
+  background: var(--primary-tint);
+  border-radius: 16px;
+  padding: 16px 20px 4px;
+}
+
+.way.is-college { background: var(--yellow-container); }
+.way h3 { margin-top: 0; }
+
+@media (min-width: 640px) {
+  .ways { grid-template-columns: 1fr 1fr; }
+}
+
+/* Заметка-совет от редакции. */
+.advice {
+  background: var(--primary-tint);
+  border-radius: 16px;
+  padding: 16px 20px 4px;
+  margin-top: 1.5rem;
+}
+
+.advice h3 { margin-top: 0; }
+
+.when {
+  background: var(--container);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 1.5rem;
+}
+
+.when p:last-child { margin-bottom: 0; }
+.when .chips { margin-bottom: 0.75rem; }
+
+.route-note {
+  background: var(--container-low);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 1.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.43;
+}
+
+/* ============================================================
+   7. ПЛЮСЫ И МИНУСЫ: ДВЕ ПЛАШКИ ПОДРЯД
+   Зелёная «Что радует» и тёмная «Что трудно» одного размера
+   и стоят рядом: ни одна сторона не выглядит важнее другой.
+   ============================================================ */
+.good, .hard {
+  border-radius: 28px;
+  padding: 24px 24px 10px;
+  margin-top: 3.5rem;
+}
+
+.good {
+  background: var(--green-container);
+  color: var(--on-green-container);
+}
+
+.hard {
+  background: var(--inverse);
+  color: var(--on-inverse);
+}
+
+/* Минусы идут сразу за плюсами: между плашками небольшой зазор. */
+.good + .hard { margin-top: 12px; }
+
+.good h2, .hard h2 { margin-top: 0; }
+.good li, .hard li { margin-bottom: 0.6rem; }
+
+/* ============================================================
+   8. ТАБЛИЦА ДЛЯ ПРОВЕРКИ ЗРЕНИЯ (страница офтальмолога)
+   Буквы настоящей таблицы Сивцева. Кнопки показывают,
+   как её видит человек с разными болезнями глаз.
+   Эффект делается фильтрами CSS по атрибуту data-vision.
+   ============================================================ */
+.chart {
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;          /* таблица всегда белая, как в кабинете */
+  color: #0A0A0A;
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  padding: 22px 12px 18px;
+  margin-top: 1.5rem;
+}
+
+.chart-rows {
+  max-width: 24rem;
+  margin: 0 auto;
+  transition: filter 0.4s ease;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr 3.4rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.chart-letters {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: 0.45em;
+  margin-right: -0.45em;        /* убираем лишний отступ после последней буквы */
+  font-size: calc(var(--size) * 1px);
+}
+
+.chart-side { font-size: 0.7rem; color: #5B6170; white-space: nowrap; }
+.chart-side:last-child { text-align: right; }
+
+/* Близорукость: вдаль всё размыто. */
+.chart[data-vision="myopia"] .chart-rows { filter: blur(4px); }
+
+/* Катаракта: мутно, тускло и желтовато. */
+.chart[data-vision="cataract"] .chart-rows { filter: blur(2.2px) contrast(0.45) sepia(0.7); }
+.chart[data-vision="cataract"] { background: #EFE3C2; }
+
+/* Глаукома: видно только в центре, по краям темнота. */
+.chart::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 42%, transparent 12%, #05070D 52%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.chart[data-vision="glaucoma"]::after { opacity: 1; }
+
+.chart-text { min-height: 6.5em; margin-top: 14px; }
+
+@media (min-width: 640px) {
+  .chart-text { min-height: 3.3em; }
+}
+
+@media (max-width: 420px) {
+  .chart-row { grid-template-columns: 2.6rem 1fr 2.6rem; }
+  .chart-side:first-child { visibility: hidden; }
+}
+
+/* ============================================================
+   9. «КОРОТКО»: ГЛАВНЫЕ ФАКТЫ ОДНИМ СПИСКОМ
+   ============================================================ */
+.facts { margin: 0; border-top: 1px solid var(--divider); }
+
+.facts div {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 34%) 1fr;
+  column-gap: 16px;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.facts dt { color: var(--ink-soft); font-size: 0.875rem; line-height: 1.7; }
+.facts dd { margin: 0; min-width: 0; }
+
+/* ============================================================
+   10. ВКЛАДКИ РАЗДЕЛОВ (страница специальности)
+   Прилипают к верху экрана. Текущий раздел подчёркнут синим.
+   ============================================================ */
+.secnav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divider);
+  margin: 2.5rem -16px 0;
+  padding: 0 4px;
+}
+
+.secnav::-webkit-scrollbar { display: none; }
+
+.secnav button {
+  position: relative;
+  flex: none;
+  height: 48px;
+  border: 0;
+  background: none;
+  padding: 0 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.secnav button:hover { background: var(--state); }
+
+.secnav button[aria-current="true"] { color: var(--primary); }
+
+.secnav button[aria-current="true"]::after {      /* синяя полоска под вкладкой */
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--primary);
+}
+
+/* Чтобы заголовок раздела не прятался под вкладками. */
+.view section { scroll-margin-top: 56px; }
+
+/* ============================================================
+   11. ВИДЕО И СПЕЦИАЛИСТ
+   ============================================================ */
+.video {
+  aspect-ratio: 16 / 9;
+  background: #202124;
+  color: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 20px;
+  margin-top: 2.5rem;
+}
+
+.play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin: 0 auto 12px;
+  position: relative;
+}
+
+.play::after {                /* треугольник «играть» */
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 20px;
+  border-left: 18px solid var(--on-primary);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.speaker {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 16px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--container-high);
+}
+
+/* ============================================================
+   12. МИФЫ И СЛОВАРИК: РАСКРЫВАЮЩИЕСЯ СТРОКИ
+   ============================================================ */
+.fold { border-top: 1px solid var(--divider); }
+.fold:last-of-type { border-bottom: 1px solid var(--divider); }
+
+.fold summary {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  column-gap: 12px;
+  align-items: center;
+  padding: 14px 8px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold summary:hover { background: var(--state); }
+.fold summary::-webkit-details-marker { display: none; }
+
+.fold summary::after {        /* стрелка вниз; у открытой строки смотрит вверх */
+  content: "";
+  width: 24px;
+  height: 24px;
+  background: var(--ink-soft);
+  -webkit-mask: var(--icon-expand) center / contain no-repeat;
+  mask: var(--icon-expand) center / contain no-repeat;
+  transition: transform 0.2s ease;
+}
+
+.fold[open] summary::after { transform: rotate(180deg); }
+.fold p { margin: 0 0 16px; padding: 0 44px 0 8px; color: var(--ink-soft); }
+
+/* ============================================================
+   13. МАРШРУТ: ЛИНИЯ С ОСТАНОВКАМИ
+   Слева возраст или время, посередине линия, справа пояснение.
+   Цвет линии задаёт переменная --line.
+   ============================================================ */
+.track-head {
+  display: grid;
+  grid-template-columns: 4rem 1.5rem 1fr;
+  column-gap: 12px;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.track-head span:first-child { text-align: right; }
+
+.track { --line: var(--primary); list-style: none; margin: 0; padding: 0; }
+
+.track li {
+  display: grid;
+  grid-template-columns: 4rem 1.5rem 1fr;
+  column-gap: 12px;
+  margin: 0;
+  padding-bottom: 1.5rem;
+}
+
+.track li:last-child { padding-bottom: 0; }
+.track li > span:last-child { min-width: 0; }
+
+.age {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: right;
+  padding-top: 0.12rem;
+}
+
+.dot { position: relative; }
+
+.dot::before {                /* линия до следующей остановки */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.75rem;
+  bottom: calc(-1.5rem - 0.75rem);
+  width: 4px;
+  margin-left: -2px;
+  background: var(--line);
+}
+
+.track li:last-child .dot::before { display: none; }
+
+.dot::after {                 /* кружок остановки */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.25rem;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 4px solid var(--line);
+}
+
+.step-name { font-weight: 500; display: block; }
+.step-text { color: var(--ink-soft); display: block; font-size: 0.875rem; line-height: 1.43; }
+
+/* Конечная остановка: профессия получена. */
+.track li.is-goal .dot::after {
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  top: 0;
+  background: var(--line);
+}
+
+.track li.is-goal .step-name { font-size: 1.25rem; font-weight: 400; line-height: 1.3; hyphens: auto; }
+
+/* После диплома линия пунктирная: дальше каждый выбирает сам. */
+.track li.is-open .dot::before {
+  background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+}
+
+/* Метка «Ты здесь» и красная остановка под ней. */
+.here {
+  display: inline-block;
+  background: var(--red);
+  color: var(--on-red);
+  border-radius: 8px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+}
+
+.track li.is-here .dot::after { background: var(--red); border-color: var(--red); }
+
+/* Второй путь: та же линия, жёлтый цвет. */
+.track.is-college { --line: var(--yellow); }
+
+.branch-box {
+  --surface: var(--yellow-container);
+  background: var(--yellow-container);
+  border-radius: 16px;
+  padding: 16px 20px 20px 8px;
+  margin-top: 1.5rem;
+}
+
+.branch-box > p { padding-left: 12px; }
+
+/* Расписание дня: та же линия, но тонкая и серая. */
+.track.is-day { --line: var(--rule); }
+.track.is-day .dot::before { width: 2px; margin-left: -1px; }
+.track.is-day .dot::after { width: 12px; height: 12px; margin-left: -6px; top: 0.4rem; border-width: 2px; border-color: var(--outline); }
+.track.is-day .age { color: var(--ink-soft); }
+
+/* ============================================================
+   14. ДЕНЬГИ: ВИЛКА И ПОЛОСЫ НА ОБЩЕЙ ШКАЛЕ
+   Шкала идёт от нуля до --max тысяч рублей.
+   Положение полосы считается из --from и --to.
+   Чёрточка стоит на отметке --avg: это средняя
+   зарплата по стране, для сравнения.
+   ============================================================ */
+.pay-total {
+  font-weight: 400;
+  font-size: clamp(1.75rem, 7.4vw, 2.75rem);
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.pay-per { font-size: 0.5em; color: var(--ink-soft); white-space: nowrap; }
+
+.pay { margin-top: 1.5rem; }
+
+.pay-row { margin-bottom: 16px; }
+
+.pay-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.875rem;
+  line-height: 1.43;
+}
+
+.pay-num { font-weight: 500; white-space: nowrap; }
+
+.pay-scale {
+  position: relative;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  background: var(--container-high);
+}
+
+.pay-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--from) / var(--max) * 100%);
+  width: calc((var(--to) - var(--from)) / var(--max) * 100%);
+  border-radius: 4px;
+  background: var(--primary);
+}
+
+.pay-scale::after {           /* чёрточка «средняя по стране» */
+  content: "";
+  position: absolute;
+  left: calc(var(--avg) / var(--max) * 100%);
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  background: var(--ink);
+}
+
+.pay-axis {
+  position: relative;
+  height: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.pay-axis span { position: absolute; top: 2px; transform: translateX(-50%); }
+.pay-axis span:first-child { left: 0; transform: none; }
+.pay-axis span:nth-child(2) { left: 33.33%; }
+.pay-axis span:nth-child(3) { left: 66.67%; }
+.pay-axis span:last-child { left: auto; right: 0; transform: none; }
+
+.pay-key {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  column-gap: 8px;
+  align-items: start;
+  margin-bottom: 1.5rem;
+  color: var(--ink-soft);
+}
+
+.pay-key::before { content: ""; width: 2px; height: 1.1rem; margin: 0.05rem auto 0; background: var(--ink); }
+
+/* ============================================================
+   15. «ТВОЁ ИЛИ НЕТ»: ВОСЕМЬ УТВЕРЖДЕНИЙ
+   Ответ хранится в атрибуте data-answer у строки.
+   Ничего не сохраняется и никуда не отправляется.
+   Три кнопки ответа соединены в одну полоску. Цвет у всех
+   ответов одинаковый: страница их не оценивает.
+   ============================================================ */
+.check { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--divider); }
+
+.check-row {
+  display: grid;
+  gap: 10px 16px;
+  align-items: center;
+  margin: 0;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--divider);
+}
+
+@media (min-width: 640px) {
+  .check-row { grid-template-columns: 1fr auto; }
+}
+
+.check-buttons { display: inline-flex; }
+
+.check-buttons button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  border: 1px solid var(--outline);
+  background: none;
+  padding: 0 14px;
+  margin-left: -1px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.check-buttons button:first-child { border-radius: 20px 0 0 20px; margin-left: 0; }
+.check-buttons button:last-child { border-radius: 0 20px 20px 0; }
+.check-buttons button:hover { background: var(--state); }
+
+.check-buttons button[aria-pressed="true"] {
+  background: var(--selected);
+  color: var(--on-selected);
+}
+
+.check-result {
+  background: var(--container);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 1.25rem;
+}
+
+.check-result p:last-child { margin-bottom: 0; }
+
+/* Восемь точек: по одной на каждое утверждение. */
+.check-dots { display: flex; align-items: center; margin-bottom: 12px; }
+
+.check-dots span {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--rule);
+  background: var(--container);
+}
+
+.check-dots span:not(:last-child) { margin-right: 14px; position: relative; }
+
+.check-dots span:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 14px;
+  height: 2px;
+  background: var(--rule);
+}
+
+.check-dots span[data-answer="yes"] { background: var(--primary); border-color: var(--primary); }
+.check-dots span[data-answer="maybe"] { border-color: var(--outline); }
+.check-dots span[data-answer="no"] { background: var(--outline); border-color: var(--outline); }
+
+/* ============================================================
+   16. ДВЕ КАРТОЧКИ РЯДОМ: «ПОХОЖЕ НА ТЕБЯ» И ВОПРОСЫ
+   ============================================================ */
+.fit { display: grid; gap: 12px; margin-top: 1rem; }
+
+.fit > div {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 16px 20px 6px;
+}
+
+.fit h3 { margin-top: 0; margin-bottom: 0.5rem; }
+
+@media (min-width: 640px) {
+  .fit { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   17. «ПОПРОБУЙ УЖЕ СЕЙЧАС»: ШАГИ ПО ПОРЯДКУ
+   ============================================================ */
+.steps { list-style: none; margin: 0 0 1.5rem; padding: 0; counter-reset: step; }
+
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  column-gap: 16px;
+  margin: 0 0 1rem;
+}
+
+.steps li > div { min-width: 0; }
+
+.steps li::before {
+  content: counter(step);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.steps strong { display: block; padding-top: 4px; }
+.steps span { display: block; color: var(--ink-soft); font-size: 0.875rem; line-height: 1.43; }
+
+/* ============================================================
+   18. «СОСЕДНИЕ СТАНЦИИ»: КУДА МОЖНО ПЕРЕЙТИ
+   ============================================================ */
+.near { list-style: none; margin: 0 0 1rem; padding: 0; border-top: 1px solid var(--divider); }
+
+.near li { margin: 0; border-bottom: 1px solid var(--divider); }
+
+.near li > * {
+  position: relative;
+  display: block;
+  padding: 14px 44px 14px 8px;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.near a:hover { background: var(--state); }
+.near a:hover .near-if { color: var(--primary); }
+
+.near a::after {              /* стрелка у строк-ссылок */
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  background: var(--ink-soft);
+  -webkit-mask: var(--icon-chevron) center / contain no-repeat;
+  mask: var(--icon-chevron) center / contain no-repeat;
+}
+
+.near-if { display: block; font-weight: 500; }
+.near-what { display: block; color: var(--ink-soft); font-size: 0.875rem; line-height: 1.43; }
+
+/* ============================================================
+   19. ПОДВАЛ
+   ============================================================ */
+.footer {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--divider);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* Тем, кто просил систему убрать анимацию. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .chart-rows, .chart::after, .fold summary::after { transition: none; }
+}

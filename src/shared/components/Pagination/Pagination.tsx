@@ -1,27 +1,26 @@
 import { PaginationProps } from './Pagination.props';
-
 export const Pagination = ({ curPage, totalPages, onPageChange, disabled }: PaginationProps) => {
-  // if (totalPages <= 1) return null;
-
+  if (totalPages <= 1) return null;
   return (
-    <nav aria-label="Страницы профессий">
+    <nav className="pagination" aria-label="Страницы каталога">
       <button
+        className="chip"
         type="button"
         disabled={disabled || curPage <= 1}
         onClick={() => onPageChange(curPage - 1)}
       >
-        Назад
+        ← Назад
       </button>
       <span aria-live="polite">
-        {' '}
-        {curPage} из {totalPages}{' '}
+        {curPage} из {totalPages}
       </span>
       <button
+        className="chip"
         type="button"
         disabled={disabled || curPage >= totalPages}
         onClick={() => onPageChange(curPage + 1)}
       >
-        Вперёд
+        Вперёд →
       </button>
     </nav>
   );

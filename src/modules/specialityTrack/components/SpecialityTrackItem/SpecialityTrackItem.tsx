@@ -1,20 +1,28 @@
 import { mediaUrl } from '@/shared/constants';
-import styles from './SpecialityTrackItem.module.scss';
 import { SpecialityTrackItemProps } from './SpecialityTrackItem.props';
 import Image from 'next/image';
-
 export const SpecialityTrackItem = ({ track }: SpecialityTrackItemProps) => {
-  console.log(track);
+  const src = /^https?:\/\//.test(track.imageLink)
+    ? track.imageLink
+    : `${mediaUrl.replace(/\/$/, '')}/${track.imageLink.replace(/^\//, '')}`;
   return (
-    <div className={styles.wrapper}>
-      <span>track</span>
-      {/* <br /> */}
-      <Image
-        src={`${mediaUrl}/${track.imageLink}`}
-        width={300}
-        height={200}
-        alt={`speciality track for speciality: ${track.specialityId}`}
-      />
-    </div>
+    <figure className="track-figure">
+      <figcaption>{track.title}</figcaption>
+      <a
+        href={src}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Открыть изображение: ${track.title}`}
+      >
+        <Image
+          className="track-image"
+          src={src}
+          width={688}
+          height={460}
+          unoptimized
+          alt={track.title}
+        />
+      </a>
+    </figure>
   );
 };

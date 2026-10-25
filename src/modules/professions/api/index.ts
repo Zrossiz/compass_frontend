@@ -19,3 +19,7 @@ export const findProfessions = async (
 
   return res.data;
 };
+
+export const getProfession = async (id: number) => {
+  return (await apiClient.get<Profession>(`/api/v1/professions/${id}`)).data;
+};

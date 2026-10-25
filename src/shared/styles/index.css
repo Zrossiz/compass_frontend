@@ -1,4 +1,164 @@
-ul {
-  margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Additions for live API data; the reference stylesheet owns the visual design. */
+.preserve-lines {
+  white-space: pre-line;
+}
+.catalog-section {
+  margin-top: 3.5rem;
+}
+.catalog-section > h2 {
+  margin-top: 0;
+}
+.catalog-status {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  min-height: 1.5em;
+}
+.catalog-list[aria-busy='true'] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.catalog-empty {
+  padding: 24px 20px;
+  border-radius: 16px;
+  background: var(--container-low);
+}
+.catalog-empty p:last-child {
+  margin-bottom: 0;
+}
+.item .item-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.item-arrow {
+  width: 24px;
+  height: 24px;
+  background: var(--ink-soft);
+  mask: var(--icon-chevron) center/contain no-repeat;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  font-size: 0.875rem;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+a.jump {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.page-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.media-card {
+  margin-top: 24px;
+}
+.media-card .video {
+  margin-top: 0;
   padding: 0;
+  overflow: hidden;
+}
+.video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-link {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  padding: 20px;
+}
+.video-link:hover {
+  background: #2b2c30;
+}
+.media-title {
+  font-weight: 500;
+  margin: 12px 8px 4px;
+}
+.media-caption {
+  margin: 0 8px;
+}
+.track-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  margin: 12px 0 24px;
+  background: var(--container-low);
+}
+.track-figure {
+  margin: 0;
+}
+.track-figure figcaption {
+  margin-top: 24px;
+  font-weight: 500;
+}
+.state-card {
+  background: var(--container);
+  border-radius: 28px;
+  padding: 24px;
+  margin-top: 32px;
+}
+.state-card h2 {
+  margin-top: 0;
+}
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  transform: translateY(-150%);
+  z-index: 20;
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--bg);
+}
+.skip-link:focus {
+  transform: none;
+}
+.skeleton {
+  min-height: 120px;
+  border-radius: 16px;
+  background: var(--container);
+  margin-top: 24px;
+}
+.auth-form {
+  display: grid;
+  gap: 20px;
+  max-width: 420px;
+  margin-top: 32px;
+}
+.auth-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+.auth-form input {
+  font: inherit;
+  padding: 16px;
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+}
+@media (max-width: 400px) {
+  .pagination {
+    flex-wrap: wrap;
+  }
 }

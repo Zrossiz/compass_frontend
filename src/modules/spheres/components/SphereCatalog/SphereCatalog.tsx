@@ -1,15 +1,14 @@
 import { SphereCatalogItem } from '../SphereCatalogItem';
-import styles from './SphereCatalog.module.scss';
 import { SphereCatalogProps } from './SphereCatalog.props';
-
-export const SphereCatalog = ({ spheres }: SphereCatalogProps) => {
-  return (
-    <div className={styles.wrapper}>
-      <ul className={styles.list}>
-        {spheres.map((sphere) => {
-          return <SphereCatalogItem key={sphere.id} sphere={sphere} />;
-        })}
-      </ul>
-    </div>
+export const SphereCatalog = ({ spheres }: SphereCatalogProps) =>
+  spheres.length ? (
+    <ul className="list">
+      {[...spheres]
+        .sort((a, b) => a.title.localeCompare(b.title, 'ru'))
+        .map((sphere) => (
+          <SphereCatalogItem key={sphere.id} sphere={sphere} />
+        ))}
+    </ul>
+  ) : (
+    <p className="catalog-empty">Сферы скоро появятся. Загляни чуть позже.</p>
   );
-};
