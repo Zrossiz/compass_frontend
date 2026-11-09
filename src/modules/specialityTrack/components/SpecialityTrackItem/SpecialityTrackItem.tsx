@@ -1,10 +1,8 @@
-import { mediaUrl } from '@/shared/constants';
+import { trackImageUrl } from '@/shared/constants';
 import { SpecialityTrackItemProps } from './SpecialityTrackItem.props';
 import Image from 'next/image';
 export const SpecialityTrackItem = ({ track }: SpecialityTrackItemProps) => {
-  const src = /^https?:\/\//.test(track.imageLink)
-    ? track.imageLink
-    : `${mediaUrl.replace(/\/$/, '')}/${track.imageLink.replace(/^\//, '')}`;
+  const src = trackImageUrl(track.imageLink);
   return (
     <figure className="track-figure">
       <figcaption>{track.title}</figcaption>
@@ -23,6 +21,7 @@ export const SpecialityTrackItem = ({ track }: SpecialityTrackItemProps) => {
           alt={track.title}
         />
       </a>
+      <p className="small">Нажми на изображение, чтобы рассмотреть все этапы.</p>
     </figure>
   );
 };

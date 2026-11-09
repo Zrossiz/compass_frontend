@@ -37,7 +37,7 @@ export default async function SpecialityPage({ params }: Props) {
   const sphere = spheres.find((item) => item.id === profession.sphereId);
   const sections = [
     { id: 'about', title: 'Коротко' },
-    ...(interviews.length ? [{ id: 'interviews', title: 'Интервью' }] : []),
+    ...(interviews.length ? [{ id: 'interviews', title: 'Видео' }] : []),
     { id: 'route', title: 'Как прийти' },
     { id: 'universities', title: 'Где учиться' },
   ];
@@ -72,8 +72,8 @@ export default async function SpecialityPage({ params }: Props) {
       </section>
       {interviews.length > 0 && (
         <section id="interviews">
-          <h2>Из первых уст</h2>
-          <p>О работе рассказывают сами специалисты.</p>
+          <h2>Видео о специальности</h2>
+          <p>Узнай больше об обучении и будущей работе.</p>
           {[...interviews]
             .sort((a, b) => a.sortOrder - b.sortOrder)
             .map((item) => (
@@ -83,7 +83,10 @@ export default async function SpecialityPage({ params }: Props) {
       )}
       <section id="route">
         <h2>Как прийти в профессию</h2>
-        <p>Посмотри, из каких шагов складывается обучение.</p>
+        <p>
+          Треки специальности — дорожные карты от колледжа до места работы. Сравни маршруты и
+          посмотри, какие этапы нужно пройти.
+        </p>
         {tracks.length ? (
           [...tracks]
             .sort((a, b) => a.sortOrder - b.sortOrder)

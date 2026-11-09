@@ -17,16 +17,21 @@ export function VideoCard({ title, url }: { title: string; url: string }) {
           ? safeUrl.pathname.split('/')[2]
           : safeUrl.searchParams.get('v');
     if (id && /^[\w-]{11}$/.test(id)) embed = `https://www.youtube-nocookie.com/embed/${id}`;
+  } else if (host === 'rutube.ru' && /^\/video\/[a-f0-9]{32}\/?$/.test(safeUrl.pathname)) {
+    embed = `https://rutube.ru/play/embed/${safeUrl.pathname.split('/')[2]}`;
   } else if (
     (host === 'rutube.ru' && safeUrl.pathname.startsWith('/play/embed/')) ||
     (['vk.com', 'vkvideo.ru'].includes(host) && safeUrl.pathname === '/video_ext.php') ||
     (host === 'player.vimeo.com' && safeUrl.pathname.startsWith('/video/'))
   )
     embed = safeUrl.href;
+  const directVideo = /\.(mp4|webm|ogv)$/i.test(safeUrl.pathname);
   return (
     <article className="media-card">
       <div className="video">
-        {embed ? (
+        {directVideo ? (
+          <video controls preload="metadata" playsInline aria-label={title} src={safeUrl.href} />
+        ) : embed ? (
           <iframe
             title={title}
             src={embed}
@@ -39,7 +44,7 @@ export function VideoCard({ title, url }: { title: string; url: string }) {
           <a className="video-link" href={safeUrl.href} target="_blank" rel="noopener noreferrer">
             <span className="play" aria-hidden="true" />
             <span>{title}</span>
-            <span className="small">Смотреть интервью ↗</span>
+            <span className="small">Смотреть видео ↗</span>
           </a>
         )}
       </div>
